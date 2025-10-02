@@ -449,6 +449,9 @@ impl Connection {
     /// `max_datagrams` specifies how many datagrams can be returned inside a
     /// single Transmit using GSO. This must be at least 1.
     #[must_use]
+    // moving this function to iram cost 50kb of ram at runtime, but results in 2.5x speedup when not using psram
+    // when using psram, this is closer to 20%
+    #[cfg_attr(all(target_os = "espidf", feature = "poll_transmit_in_iram"), link_section = ".iram1")]
     pub fn poll_transmit(
         &mut self,
         now: Instant,

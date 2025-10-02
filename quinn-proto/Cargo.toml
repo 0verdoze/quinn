@@ -35,6 +35,9 @@ tracing-log = ["tracing/log"]
 rustls-log = ["rustls?/logging"]
 # Enable qlog support
 qlog = ["dep:qlog"]
+# Potential speed improvements for embeded targets
+poll_transmit_in_iram = []
+finish_and_track_in_iram = []
 
 # Internal (PRIVATE!) features used to aid testing.
 # Don't rely on these whatsoever. They may disappear at any time.

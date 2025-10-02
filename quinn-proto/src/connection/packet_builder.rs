@@ -181,6 +181,8 @@ impl PacketBuilder {
         );
     }
 
+    // small speedup when not using psram
+    #[cfg_attr(all(target_os = "espidf", feature = "finish_and_track_in_iram"), link_section = ".iram1")]
     pub(super) fn finish_and_track(
         self,
         now: Instant,

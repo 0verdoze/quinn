@@ -121,7 +121,7 @@ fn send(socket: UdpSockRef<'_>, transmit: &Transmit<'_>) -> io::Result<()> {
     socket.0.send_to(
         transmit.contents,
         &socket2::SockAddr::from(transmit.destination),
-    )
+    ).map(|_| ())
 }
 
 pub(crate) const BATCH_SIZE: usize = 1;

@@ -38,10 +38,10 @@ use std::{
     time::{Duration, Instant},
 };
 
-#[cfg(any(unix, windows))]
+#[cfg(all(any(unix, windows), not(target_os = "espidf")))]
 mod cmsg;
 
-#[cfg(unix)]
+#[cfg(all(unix, not(target_os = "espidf")))]
 #[path = "unix.rs"]
 mod imp;
 
@@ -50,7 +50,7 @@ mod imp;
 mod imp;
 
 // No ECN support
-#[cfg(not(any(wasm_browser, unix, windows)))]
+#[cfg(any(not(any(wasm_browser, unix, windows)), target_os = "espidf"))]
 #[path = "fallback.rs"]
 mod imp;
 
